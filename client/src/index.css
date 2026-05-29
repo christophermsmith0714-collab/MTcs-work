@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 22% 8%;
+    --foreground: 195 20% 88%;
+    --card: 210 20% 11%;
+    --card-foreground: 195 20% 88%;
+    --popover: 210 20% 11%;
+    --popover-foreground: 195 20% 88%;
+    --primary: 177 55% 38%;
+    --primary-foreground: 210 22% 8%;
+    --secondary: 210 18% 16%;
+    --secondary-foreground: 195 20% 88%;
+    --muted: 210 18% 16%;
+    --muted-foreground: 210 12% 50%;
+    --accent: 177 55% 38%;
+    --accent-foreground: 210 22% 8%;
+    --destructive: 0 62% 55%;
+    --destructive-foreground: 195 20% 88%;
+    --border: 210 16% 18%;
+    --input: 210 16% 18%;
+    --ring: 177 55% 38%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: hsl(var(--background)); }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
+
+/* Status badges */
+.badge-not-started { background: hsl(210 12% 20%); color: hsl(210 12% 55%); }
+.badge-in-progress { background: hsl(38 80% 50% / 0.15); color: hsl(38 85% 62%); }
+.badge-done { background: hsl(142 50% 40% / 0.15); color: hsl(142 55% 52%); }
+.badge-sent { background: hsl(177 55% 38% / 0.15); color: hsl(177 60% 52%); }
+.badge-uploaded { background: hsl(270 55% 60% / 0.15); color: hsl(270 60% 68%); }
+
+/* Status pill (rounded, like reference) */
+.status-due-soon { background: hsl(38 80% 50% / 0.2); color: hsl(38 90% 65%); border: 1px solid hsl(38 80% 50% / 0.35); }
+.status-on-track { background: hsl(177 55% 38% / 0.2); color: hsl(177 60% 55%); border: 1px solid hsl(177 55% 38% / 0.35); }
+.status-overdue { background: hsl(0 62% 50% / 0.2); color: hsl(0 70% 62%); border: 1px solid hsl(0 62% 50% / 0.35); }
+.status-not-started { background: hsl(210 12% 20%); color: hsl(210 12% 55%); border: 1px solid hsl(210 12% 28%); }
+
+/* Glow effect for icons */
+.icon-glow-teal { box-shadow: 0 0 18px hsl(177 55% 38% / 0.4); }
+.icon-glow-orange { box-shadow: 0 0 18px hsl(38 80% 50% / 0.4); }
+.icon-glow-red { box-shadow: 0 0 18px hsl(0 62% 50% / 0.4); }
