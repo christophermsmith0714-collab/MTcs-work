@@ -52,6 +52,7 @@ sqlite.exec(`
     assigned_to INTEGER,
     priority TEXT NOT NULL DEFAULT 'Normal',
     completed_at TEXT, sent_at TEXT, uploaded_at TEXT,
+    hours_spent TEXT, miles_driven TEXT,
     notes TEXT,
     created_at TEXT NOT NULL,
     created_by INTEGER
@@ -67,6 +68,8 @@ sqlite.exec(`
 // Add missing columns if upgrading existing DB
 try { sqlite.exec(`ALTER TABLE users ADD COLUMN password_hash TEXT NOT NULL DEFAULT ''`); } catch {}
 try { sqlite.exec(`ALTER TABLE jobs ADD COLUMN created_by INTEGER`); } catch {}
+try { sqlite.exec(`ALTER TABLE jobs ADD COLUMN hours_spent TEXT`); } catch {}
+try { sqlite.exec(`ALTER TABLE jobs ADD COLUMN miles_driven TEXT`); } catch {}
 
 export interface IStorage {
   // Sessions

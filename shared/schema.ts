@@ -57,6 +57,8 @@ export const jobs = sqliteTable("jobs", {
   completedAt: text("completed_at"),
   sentAt: text("sent_at"),
   uploadedAt: text("uploaded_at"),
+  hoursSpent: text("hours_spent"),
+  milesDriven: text("miles_driven"),
   notes: text("notes"),
   createdAt: text("created_at").notNull(),
   createdBy: integer("created_by"),

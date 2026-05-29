@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
-import { Briefcase, AlertTriangle, Clock, Users, CheckCircle2, CalendarClock, ArrowRight, Send } from "lucide-react";
+import { Briefcase, AlertTriangle, Clock, Users, CheckCircle2, CalendarClock, ArrowRight, Send, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
@@ -41,10 +41,12 @@ function statusPill(status: string) {
   }
 }
 
-function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssigned, onComplete }: {
+function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssigned, onComplete, onReopen, isCompleted }: {
   jobs: Job[]; clientMap: Map<number, Client>; userMap: Map<number, User>;
   statusMutation: any; isAdmin: boolean; showAssigned: boolean;
   onComplete?: (job: Job) => void;
+  onReopen?: (job: Job) => void;
+  isCompleted?: boolean;
 }) {
   const typeLabel = (jobType: string) => {
     if (jobType.includes("SPCC")) return <span className="text-primary text-[10px] font-semibold">SPCC</span>;
@@ -54,6 +56,50 @@ function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssig
 
   if (jobs.length === 0) {
     return <div className="p-8 text-center text-muted-foreground text-sm">No jobs here.</div>;
+  }
+
+  // Completed table: Job | Client | Completed On | Hours | Miles | Assigned | Reopen
+  if (isCompleted) {
+    return (
+      <div className="divide-y divide-border">
+        {jobs.map((job) => {
+          const client = clientMap.get(job.clientId);
+          const assignee = job.assignedTo ? userMap.get(job.assignedTo) : null;
+          const completedOn = job.completedAt ? format(new Date(job.completedAt), "MMM d, yyyy") : "—";
+          return (
+            <div key={job.id} className="grid grid-cols-[2fr_1.5fr_1fr_0.7fr_0.7fr_1fr_auto] gap-2 items-center px-5 py-3 hover:bg-secondary/30 transition-colors">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-6 h-6 rounded border border-border bg-secondary flex items-center justify-center shrink-0">
+                  <Briefcase className="w-3 h-3 text-muted-foreground" />
+                </div>
+                <span className="text-sm text-foreground truncate">{job.title}</span>
+              </div>
+              <span className="text-sm text-muted-foreground truncate">{client?.company ?? "—"}</span>
+              <span className="text-xs text-muted-foreground">{completedOn}</span>
+              <span className="text-xs font-medium text-foreground">{job.hoursSpent ? `${job.hoursSpent} hrs` : "—"}</span>
+              <span className="text-xs font-medium text-foreground">{job.milesDriven ? `${job.milesDriven} mi` : "—"}</span>
+              <div>
+                {assignee ? (
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold text-background shrink-0" style={{ background: assignee.color }}>
+                      {assignee.name[0]}
+                    </div>
+                    <span className="text-xs text-muted-foreground truncate">{assignee.name}</span>
+                  </div>
+                ) : <span className="text-xs text-muted-foreground/40 italic">—</span>}
+              </div>
+              <button
+                onClick={() => onReopen?.(job)}
+                className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded hover:bg-secondary"
+                title="Reopen — move back to Upcoming"
+              >
+                <RotateCcw className="w-3 h-3" /> Reopen
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 
   const cols = showAssigned
@@ -121,7 +167,20 @@ function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssig
   );
 }
 
-function TableHeader({ showAssigned }: { showAssigned: boolean }) {
+function TableHeader({ showAssigned, isCompleted }: { showAssigned: boolean; isCompleted?: boolean }) {
+  if (isCompleted) {
+    return (
+      <div className="grid grid-cols-[2fr_1.5fr_1fr_0.7fr_0.7fr_1fr_auto] gap-2 px-5 py-2 border-b border-border text-[11px] text-muted-foreground font-medium uppercase tracking-wide">
+        <span>Job Name</span>
+        <span>Client</span>
+        <span>Completed On</span>
+        <span>Hours</span>
+        <span>Miles</span>
+        <span>Assigned</span>
+        <span></span>
+      </div>
+    );
+  }
   const cols = showAssigned
     ? "grid-cols-[2.5fr_1.5fr_1fr_1fr_1fr_1fr]"
     : "grid-cols-[2.5fr_1.5fr_1fr_1fr_1fr]";
@@ -153,7 +212,7 @@ export default function Dashboard() {
   const isAdmin = user?.role === "admin";
 
   // Completion dialog state
-  const [completeDialog, setCompleteDialog] = useState<{ job: Job; renewDate: string } | null>(null);
+  const [completeDialog, setCompleteDialog] = useState<{ job: Job; renewDate: string; hours: string; miles: string } | null>(null);
 
   const { data: stats, isLoading: statsLoading } = useQuery<{ activeJobs: number; dueThisWeek: number; overdue: number; totalClients: number }>({
     queryKey: ["/api/dashboard/stats"],
@@ -175,10 +234,20 @@ export default function Dashboard() {
     onSuccess: () => { queryClient.invalidateQueries(); toast({ title: "Data loaded" }); },
   });
 
+  const reopenMutation = useMutation({
+    mutationFn: (jobId: number) => apiRequest("POST", `/api/jobs/${jobId}/reopen`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/jobs?completed=true"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard/stats"] });
+      toast({ title: "Job reopened", description: "Moved back to Upcoming." });
+    },
+  });
+
   const completeMutation = useMutation({
-    mutationFn: async ({ job, renewDate }: { job: Job; renewDate: string }) => {
-      // Mark current job as Completed
-      await apiRequest("PATCH", `/api/jobs/${job.id}`, { status: "Completed" });
+    mutationFn: async ({ job, renewDate, hours, miles }: { job: Job; renewDate: string; hours: string; miles: string }) => {
+      // Mark current job as Completed with billing info
+      await apiRequest("PATCH", `/api/jobs/${job.id}`, { status: "Completed", hoursSpent: hours, milesDriven: miles });
       // Create renewal job with new date
       await apiRequest("POST", "/api/jobs", {
         clientId: job.clientId,
@@ -203,7 +272,7 @@ export default function Dashboard() {
   });
 
   const handleComplete = (job: Job) => {
-    setCompleteDialog({ job, renewDate: "" });
+    setCompleteDialog({ job, renewDate: "", hours: "", miles: "" });
   };
 
   const statusMutation = useMutation({
@@ -336,7 +405,7 @@ export default function Dashboard() {
                 View All Jobs <ArrowRight className="w-3 h-3" />
               </a>
             </div>
-            <TableHeader showAssigned={isAdmin} />
+            <TableHeader showAssigned={isAdmin} isCompleted={section.status === "Completed"} />
             <JobTable
               jobs={section.jobs}
               clientMap={clientMap}
@@ -345,6 +414,8 @@ export default function Dashboard() {
               isAdmin={isAdmin}
               showAssigned={isAdmin}
               onComplete={section.status !== "Completed" ? handleComplete : undefined}
+              onReopen={section.status === "Completed" ? (job) => reopenMutation.mutate(job.id) : undefined}
+              isCompleted={section.status === "Completed"}
             />
           </div>
         ))
@@ -361,14 +432,37 @@ export default function Dashboard() {
               <p className="text-sm text-muted-foreground mb-1">Job</p>
               <p className="text-sm font-medium text-foreground">{completeDialog?.job.title}</p>
             </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs text-muted-foreground mb-1.5 font-medium">Hours Spent</label>
+                <Input
+                  type="number"
+                  min="0"
+                  step="0.5"
+                  placeholder="e.g. 4.5"
+                  value={completeDialog?.hours ?? ""}
+                  onChange={(e) => setCompleteDialog((d) => d ? { ...d, hours: e.target.value } : null)}
+                />
+              </div>
+              <div>
+                <label className="block text-xs text-muted-foreground mb-1.5 font-medium">Miles Driven</label>
+                <Input
+                  type="number"
+                  min="0"
+                  placeholder="e.g. 120"
+                  value={completeDialog?.miles ?? ""}
+                  onChange={(e) => setCompleteDialog((d) => d ? { ...d, miles: e.target.value } : null)}
+                />
+              </div>
+            </div>
             <div>
-              <label className="block text-sm text-muted-foreground mb-1.5">Next Due Date for Renewal Job</label>
+              <label className="block text-xs text-muted-foreground mb-1.5 font-medium">Next Due Date for Renewal Job</label>
               <Input
                 type="date"
                 value={completeDialog?.renewDate ?? ""}
                 onChange={(e) => setCompleteDialog((d) => d ? { ...d, renewDate: e.target.value } : null)}
               />
-              <p className="text-xs text-muted-foreground mt-1">A new job will be created with this date in Upcoming.</p>
+              <p className="text-xs text-muted-foreground mt-1">A new Upcoming job will be created with this date.</p>
             </div>
           </div>
           <DialogFooter>
@@ -376,11 +470,11 @@ export default function Dashboard() {
             <Button
               onClick={() => {
                 if (!completeDialog?.renewDate) return;
-                completeMutation.mutate({ job: completeDialog.job, renewDate: completeDialog.renewDate });
+                completeMutation.mutate({ job: completeDialog.job, renewDate: completeDialog.renewDate, hours: completeDialog.hours, miles: completeDialog.miles });
               }}
               disabled={!completeDialog?.renewDate || completeMutation.isPending}
             >
-              {completeMutation.isPending ? "Saving..." : "Mark Complete & Schedule Renewal"}
+              {completeMutation.isPending ? "Saving..." : "Complete & Schedule Renewal"}
             </Button>
           </DialogFooter>
         </DialogContent>

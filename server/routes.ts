@@ -234,13 +234,27 @@ export function registerRoutes(httpServer: Server, app: Express): Server {
     const now = new Date().toISOString();
     const updates: any = { ...req.body };
     if (updates.status && updates.status !== existing.status) {
-      if (updates.status === "Done") updates.completedAt = now;
+      if (updates.status === "Completed") updates.completedAt = now;
       if (updates.status === "Sent to Client") updates.sentAt = now;
       if (updates.status === "Uploaded to Onehub") updates.uploadedAt = now;
       storage.logActivity({ jobId: id, clientId: existing.clientId, userId: session.userId, action: "status_change", detail: `"${existing.title}" → ${updates.status} (by ${session.name})`, createdAt: now });
     }
 
     const updated = storage.updateJob(id, updates);
+    res.json(updated);
+  });
+
+  // Reopen a completed job (moves it back to Upcoming, clears billing data)
+  app.post("/api/jobs/:id/reopen", requireAuth, (req, res) => {
+    const id = parseInt(req.params.id);
+    const existing = storage.getJobById(id);
+    if (!existing) return res.status(404).json({ error: "Not found" });
+    const updated = storage.updateJob(id, {
+      status: "Upcoming",
+      completedAt: null,
+      hoursSpent: null,
+      milesDriven: null,
+    } as any);
     res.json(updated);
   });
 
