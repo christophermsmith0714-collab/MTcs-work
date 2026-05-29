@@ -1,13 +1,16 @@
+import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import { Briefcase, AlertTriangle, Clock, Users, CheckCircle2, CalendarClock, ArrowRight, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/lib/auth";
 import type { Job, Client, User } from "@shared/schema";
-import { format, isPast, isWithinInterval, addDays } from "date-fns";
+import { format, isPast } from "date-fns";
 
 export const STATUSES = ["Upcoming", "Scheduled", "Pending Response", "Completed"];
 
@@ -38,9 +41,10 @@ function statusPill(status: string) {
   }
 }
 
-function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssigned }: {
+function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssigned, onComplete }: {
   jobs: Job[]; clientMap: Map<number, Client>; userMap: Map<number, User>;
   statusMutation: any; isAdmin: boolean; showAssigned: boolean;
+  onComplete?: (job: Job) => void;
 }) {
   const typeLabel = (jobType: string) => {
     if (jobType.includes("SPCC")) return <span className="text-primary text-[10px] font-semibold">SPCC</span>;
@@ -78,7 +82,16 @@ function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssig
             </span>
             <div>{typeLabel(job.jobType)}</div>
             <div>
-              <Select value={job.status} onValueChange={(s) => statusMutation.mutate({ id: job.id, status: s })}>
+              <Select
+                value={job.status}
+                onValueChange={(s) => {
+                  if (s === "Completed" && onComplete) {
+                    onComplete(job);
+                  } else {
+                    statusMutation.mutate({ id: job.id, status: s });
+                  }
+                }}
+              >
                 <SelectTrigger className="h-auto border-0 bg-transparent p-0 shadow-none focus:ring-0 w-auto" data-testid={`select-status-${job.id}`}>
                   <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold ${statusPill(job.status)}`}>
                     {job.status}
@@ -139,11 +152,21 @@ export default function Dashboard() {
   const { toast } = useToast();
   const isAdmin = user?.role === "admin";
 
+  // Completion dialog state
+  const [completeDialog, setCompleteDialog] = useState<{ job: Job; renewDate: string } | null>(null);
+
   const { data: stats, isLoading: statsLoading } = useQuery<{ activeJobs: number; dueThisWeek: number; overdue: number; totalClients: number }>({
     queryKey: ["/api/dashboard/stats"],
   });
 
   const { data: jobs, isLoading: jobsLoading } = useQuery<Job[]>({ queryKey: ["/api/jobs"] });
+  const { data: completedJobsData, isLoading: completedLoading } = useQuery<Job[]>({
+    queryKey: ["/api/jobs?completed=true"],
+    queryFn: async () => {
+      const res = await apiRequest("GET", "/api/jobs?completed=true");
+      return res.json();
+    },
+  });
   const { data: clients } = useQuery<Client[]>({ queryKey: ["/api/clients"] });
   const { data: users } = useQuery<User[]>({ queryKey: ["/api/users"] });
 
@@ -152,10 +175,42 @@ export default function Dashboard() {
     onSuccess: () => { queryClient.invalidateQueries(); toast({ title: "Data loaded" }); },
   });
 
+  const completeMutation = useMutation({
+    mutationFn: async ({ job, renewDate }: { job: Job; renewDate: string }) => {
+      // Mark current job as Completed
+      await apiRequest("PATCH", `/api/jobs/${job.id}`, { status: "Completed" });
+      // Create renewal job with new date
+      await apiRequest("POST", "/api/jobs", {
+        clientId: job.clientId,
+        jobType: job.jobType,
+        title: job.title,
+        description: job.description,
+        dueDate: renewDate,
+        assignedTo: job.assignedTo,
+        priority: job.priority,
+        notes: job.notes,
+        status: "Upcoming",
+        createdAt: new Date().toISOString(),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/jobs?completed=true"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard/stats"] });
+      setCompleteDialog(null);
+      toast({ title: "Job completed", description: "A new renewal job has been created." });
+    },
+  });
+
+  const handleComplete = (job: Job) => {
+    setCompleteDialog({ job, renewDate: "" });
+  };
+
   const statusMutation = useMutation({
     mutationFn: ({ id, status }: { id: number; status: string }) => apiRequest("PATCH", `/api/jobs/${id}`, { status }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/jobs?completed=true"] });
       queryClient.invalidateQueries({ queryKey: ["/api/dashboard/stats"] });
     },
   });
@@ -179,7 +234,7 @@ export default function Dashboard() {
     .filter((j) => j.status === "Pending Response")
     .sort((a, b) => new Date(a.dueDate!).getTime() - new Date(b.dueDate!).getTime());
 
-  const completedJobs = jobs?.filter((j) => j.status === "Completed") ?? [];
+  const completedJobs = completedJobsData ?? [];
 
   const sections: Section[] = [
     {
@@ -289,10 +344,47 @@ export default function Dashboard() {
               statusMutation={statusMutation}
               isAdmin={isAdmin}
               showAssigned={isAdmin}
+              onComplete={section.status !== "Completed" ? handleComplete : undefined}
             />
           </div>
         ))
       )}
+
+      {/* Complete Job Dialog */}
+      <Dialog open={!!completeDialog} onOpenChange={(open) => { if (!open) setCompleteDialog(null); }}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Mark Job Complete</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-1">
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Job</p>
+              <p className="text-sm font-medium text-foreground">{completeDialog?.job.title}</p>
+            </div>
+            <div>
+              <label className="block text-sm text-muted-foreground mb-1.5">Next Due Date for Renewal Job</label>
+              <Input
+                type="date"
+                value={completeDialog?.renewDate ?? ""}
+                onChange={(e) => setCompleteDialog((d) => d ? { ...d, renewDate: e.target.value } : null)}
+              />
+              <p className="text-xs text-muted-foreground mt-1">A new job will be created with this date in Upcoming.</p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setCompleteDialog(null)}>Cancel</Button>
+            <Button
+              onClick={() => {
+                if (!completeDialog?.renewDate) return;
+                completeMutation.mutate({ job: completeDialog.job, renewDate: completeDialog.renewDate });
+              }}
+              disabled={!completeDialog?.renewDate || completeMutation.isPending}
+            >
+              {completeMutation.isPending ? "Saving..." : "Mark Complete & Schedule Renewal"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
