@@ -14,6 +14,12 @@ import { format, isPast } from "date-fns";
 
 export const STATUSES = ["Upcoming", "Scheduled", "Pending Response", "Completed"];
 
+// Parse YYYY-MM-DD strings as local time (not UTC) to avoid off-by-one day shifts
+function parseLocalDate(dateStr: string): Date {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
 function Sparkline({ color, up }: { color: string; up: boolean }) {
   const points = up ? "0,20 8,16 16,14 24,10 32,8 40,5 48,3" : "0,5 8,8 16,7 24,12 32,14 40,16 48,18";
   return (
@@ -111,8 +117,8 @@ function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssig
     <div className="divide-y divide-border">
       {jobs.map((job) => {
         const client = clientMap.get(job.clientId);
-        const due = job.dueDate ? new Date(job.dueDate) : null;
-        const sched = job.scheduleDate ? new Date(job.scheduleDate) : null;
+        const due = job.dueDate ? parseLocalDate(job.dueDate) : null;
+        const sched = job.scheduleDate ? parseLocalDate(job.scheduleDate) : null;
         const isOverdue = due ? isPast(due) && job.status !== "Completed" : false;
         const assignee = job.assignedTo ? userMap.get(job.assignedTo) : null;
 
@@ -319,7 +325,12 @@ export default function Dashboard() {
 
   const scheduledJobs = allJobs
     .filter((j) => j.status === "Scheduled")
-    .sort((a, b) => new Date(a.dueDate!).getTime() - new Date(b.dueDate!).getTime());
+    .sort((a, b) => {
+      // Sort by scheduleDate first; fall back to dueDate if no scheduleDate
+      const aDate = a.scheduleDate ?? a.dueDate ?? "";
+      const bDate = b.scheduleDate ?? b.dueDate ?? "";
+      return aDate.localeCompare(bDate);
+    });
 
   const pendingJobs = allJobs
     .filter((j) => j.status === "Pending Response")

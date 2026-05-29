@@ -20,6 +20,12 @@ import StatusBadge from "../components/StatusBadge";
 import { z } from "zod";
 import { Skeleton } from "@/components/ui/skeleton";
 
+// Parse YYYY-MM-DD as local time to avoid UTC off-by-one day shift
+function parseLocalDate(s: string): Date {
+  const [y, m, d] = s.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
 const JOB_TYPES = ["SPCC Plan", "SWPPP", "Tank Inspection", "Tier II", "Stormwater Permit", "Other"];
 const STATUSES = ["Upcoming", "Scheduled", "Pending Response", "Completed"];
 const PRIORITIES = ["High", "Normal", "Low"];
@@ -205,7 +211,7 @@ export default function Jobs() {
                 ) : filtered.map((job) => {
                   const client = clientMap.get(job.clientId);
                   const assignee = job.assignedTo ? userMap.get(job.assignedTo) : null;
-                  const due = job.dueDate ? new Date(job.dueDate) : null;
+                  const due = job.dueDate ? parseLocalDate(job.dueDate) : null;
                   const isOverdue = due ? isPast(due) && job.status !== "Completed" : false;
                   const currentStatusIdx = STATUSES.indexOf(job.status);
 
@@ -224,7 +230,7 @@ export default function Jobs() {
                         {isOverdue && <div className="text-[10px] text-red-400">OVERDUE</div>}
                       </td>
                       <td className="px-4 py-3 text-xs text-muted-foreground">
-                        {job.scheduleDate ? format(new Date(job.scheduleDate), "MMM d, yyyy") : "—"}
+                        {job.scheduleDate ? format(parseLocalDate(job.scheduleDate), "MMM d, yyyy") : "—"}
                       </td>
                       <td className="px-4 py-3">
                         {assignee ? (
