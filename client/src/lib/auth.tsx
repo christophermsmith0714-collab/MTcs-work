@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
-import { setSessionToken, queryClient } from "./queryClient";
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
+import { setSessionToken, getSessionToken, queryClient } from "./queryClient";
 
 export interface AuthUser {
   id: number;
@@ -11,18 +11,32 @@ export interface AuthUser {
 
 interface AuthContextType {
   user: AuthUser | null;
+  loading: boolean;
   login: (user: AuthUser, token: string) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
+  loading: true,
   login: () => {},
   logout: () => {},
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // On mount, try to restore session from localStorage token
+  useEffect(() => {
+    const token = getSessionToken();
+    if (!token) { setLoading(false); return; }
+    fetch("/api/auth/me", { headers: { "x-session-token": token } })
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => { if (data) setUser(data); else setSessionToken(null); })
+      .catch(() => setSessionToken(null))
+      .finally(() => setLoading(false));
+  }, []);
 
   const login = useCallback((user: AuthUser, token: string) => {
     setSessionToken(token);
@@ -36,7 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

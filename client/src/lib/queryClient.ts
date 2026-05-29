@@ -1,10 +1,17 @@
 import { QueryClient } from "@tanstack/react-query";
 
-// Store session token in memory (not localStorage — blocked in iframe)
-let sessionToken: string | null = null;
+// Store session token in localStorage so it survives page refreshes
+const SESSION_KEY = "mtcs_session_token";
+let sessionToken: string | null = (() => {
+  try { return localStorage.getItem(SESSION_KEY); } catch { return null; }
+})();
 
 export function setSessionToken(token: string | null) {
   sessionToken = token;
+  try {
+    if (token) localStorage.setItem(SESSION_KEY, token);
+    else localStorage.removeItem(SESSION_KEY);
+  } catch {}
 }
 export function getSessionToken() {
   return sessionToken;

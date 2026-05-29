@@ -13,6 +13,13 @@ const sqlite = new Database("data.db");
 const db = drizzle(sqlite);
 
 sqlite.exec(`
+  CREATE TABLE IF NOT EXISTS sessions (
+    token TEXT PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    role TEXT NOT NULL,
+    name TEXT NOT NULL,
+    created_at TEXT NOT NULL
+  );
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -59,6 +66,11 @@ try { sqlite.exec(`ALTER TABLE users ADD COLUMN password_hash TEXT NOT NULL DEFA
 try { sqlite.exec(`ALTER TABLE jobs ADD COLUMN created_by INTEGER`); } catch {}
 
 export interface IStorage {
+  // Sessions
+  createSession(token: string, userId: number, role: string, name: string): void;
+  getSession(token: string): { userId: number; role: string; name: string } | null;
+  deleteSession(token: string): void;
+
   getUsers(): User[];
   getUserById(id: number): User | undefined;
   getUserByEmail(email: string): User | undefined;
@@ -86,6 +98,19 @@ export interface IStorage {
 }
 
 export class Storage implements IStorage {
+  createSession(token: string, userId: number, role: string, name: string): void {
+    sqlite.prepare(`INSERT OR REPLACE INTO sessions (token, user_id, role, name, created_at) VALUES (?, ?, ?, ?, ?)`)
+      .run(token, userId, role, name, new Date().toISOString());
+  }
+  getSession(token: string): { userId: number; role: string; name: string } | null {
+    const row = sqlite.prepare(`SELECT user_id, role, name FROM sessions WHERE token = ?`).get(token) as any;
+    if (!row) return null;
+    return { userId: row.user_id, role: row.role, name: row.name };
+  }
+  deleteSession(token: string): void {
+    sqlite.prepare(`DELETE FROM sessions WHERE token = ?`).run(token);
+  }
+
   getUsers(): User[] {
     return db.select().from(users).orderBy(asc(users.name)).all();
   }

@@ -6,19 +6,14 @@ import bcrypt from "bcryptjs";
 import fs from "fs";
 import path from "path";
 
-// ── Simple session store (in-memory, survives restarts via cookie) ───
-// We store userId + role in a signed token concept — but for simplicity
-// we just use a plain object session keyed by a random token stored in cookie.
-const sessions: Map<string, { userId: number; role: string; name: string }> = new Map();
-
 function randomToken() {
-  return Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+  return Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
 }
 
 function getSession(req: Request) {
   const token = req.headers["x-session-token"] as string;
   if (!token) return null;
-  return sessions.get(token) ?? null;
+  return storage.getSession(token);
 }
 
 function requireAuth(req: Request, res: Response, next: NextFunction) {
@@ -47,13 +42,13 @@ export function registerRoutes(httpServer: Server, app: Express): Server {
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) return res.status(401).json({ error: "Invalid email or password" });
     const token = randomToken();
-    sessions.set(token, { userId: user.id, role: user.role, name: user.name });
+    storage.createSession(token, user.id, user.role, user.name);
     res.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role, color: user.color } });
   });
 
   app.post("/api/auth/logout", (req, res) => {
     const token = req.headers["x-session-token"] as string;
-    if (token) sessions.delete(token);
+    if (token) storage.deleteSession(token);
     res.json({ success: true });
   });
 
