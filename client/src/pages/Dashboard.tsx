@@ -41,11 +41,12 @@ function statusPill(status: string) {
   }
 }
 
-function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssigned, onComplete, onReopen, isCompleted }: {
+function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssigned, onComplete, onReopen, isCompleted, onSchedule }: {
   jobs: Job[]; clientMap: Map<number, Client>; userMap: Map<number, User>;
   statusMutation: any; isAdmin: boolean; showAssigned: boolean;
   onComplete?: (job: Job) => void;
   onReopen?: (job: Job) => void;
+  onSchedule?: (job: Job) => void;
   isCompleted?: boolean;
 }) {
   const typeLabel = (jobType: string) => {
@@ -137,6 +138,8 @@ function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssig
                 onValueChange={(s) => {
                   if (s === "Completed" && onComplete) {
                     onComplete(job);
+                  } else if (s === "Scheduled" && onSchedule) {
+                    onSchedule(job);
                   } else {
                     statusMutation.mutate({ id: job.id, status: s });
                   }
@@ -219,6 +222,9 @@ export default function Dashboard() {
   // Completion dialog state
   const [completeDialog, setCompleteDialog] = useState<{ job: Job; renewDate: string; hours: string; miles: string } | null>(null);
 
+  // Schedule dialog state — fires when status is changed to "Scheduled"
+  const [scheduleDialog, setScheduleDialog] = useState<{ job: Job; scheduleDate: string } | null>(null);
+
   const { data: stats, isLoading: statsLoading } = useQuery<{ dueThisWeek: number; overdue: number; dueThisMonth: number; dueThisQuarter: number; dueThisYear: number }>({
     queryKey: ["/api/dashboard/stats"],
   });
@@ -280,8 +286,19 @@ export default function Dashboard() {
     setCompleteDialog({ job, renewDate: "", hours: "", miles: "" });
   };
 
+  const handleSchedule = (job: Job) => {
+    setScheduleDialog({ job, scheduleDate: job.scheduleDate ?? "" });
+  };
+
+  const confirmSchedule = () => {
+    if (!scheduleDialog?.scheduleDate) return;
+    statusMutation.mutate({ id: scheduleDialog.job.id, status: "Scheduled", scheduleDate: scheduleDialog.scheduleDate });
+    setScheduleDialog(null);
+  };
+
   const statusMutation = useMutation({
-    mutationFn: ({ id, status }: { id: number; status: string }) => apiRequest("PATCH", `/api/jobs/${id}`, { status }),
+    mutationFn: ({ id, status, scheduleDate }: { id: number; status: string; scheduleDate?: string }) =>
+      apiRequest("PATCH", `/api/jobs/${id}`, scheduleDate ? { status, scheduleDate } : { status }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/jobs"] });
       queryClient.invalidateQueries({ queryKey: ["/api/jobs?completed=true"] });
@@ -420,12 +437,46 @@ export default function Dashboard() {
               isAdmin={isAdmin}
               showAssigned={isAdmin}
               onComplete={section.status !== "Completed" ? handleComplete : undefined}
+              onSchedule={section.status !== "Completed" ? handleSchedule : undefined}
               onReopen={section.status === "Completed" ? (job) => reopenMutation.mutate(job.id) : undefined}
               isCompleted={section.status === "Completed"}
             />
           </div>
         ))
       )}
+
+      {/* Schedule Date Dialog */}
+      <Dialog open={!!scheduleDialog} onOpenChange={(open) => { if (!open) setScheduleDialog(null); }}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Schedule This Job</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3 py-1">
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Job</p>
+              <p className="text-sm font-medium text-foreground">{scheduleDialog?.job.title}</p>
+            </div>
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1.5 font-medium">Schedule Date</label>
+              <Input
+                type="date"
+                value={scheduleDialog?.scheduleDate ?? ""}
+                onChange={(e) => setScheduleDialog((d) => d ? { ...d, scheduleDate: e.target.value } : null)}
+              />
+              <p className="text-xs text-muted-foreground mt-1">The date this job is scheduled to be performed.</p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setScheduleDialog(null)}>Cancel</Button>
+            <Button
+              onClick={confirmSchedule}
+              disabled={!scheduleDialog?.scheduleDate || statusMutation.isPending}
+            >
+              {statusMutation.isPending ? "Saving..." : "Mark as Scheduled"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Complete Job Dialog */}
       <Dialog open={!!completeDialog} onOpenChange={(open) => { if (!open) setCompleteDialog(null); }}>
