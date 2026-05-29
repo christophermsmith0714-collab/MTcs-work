@@ -43,12 +43,22 @@ export default function Team() {
   });
 
   const createMutation = useMutation({
-    mutationFn: (data: TeamFormValues) => apiRequest("POST", "/api/users", data),
+    mutationFn: async (data: TeamFormValues) => {
+      const res = await apiRequest("POST", "/api/users", data);
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Failed to add team member");
+      }
+      return res.json();
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/users"] });
       setDialogOpen(false);
       form.reset();
       toast({ title: "Team member added" });
+    },
+    onError: (err: any) => {
+      toast({ title: "Error", description: err.message, variant: "destructive" });
     },
   });
 

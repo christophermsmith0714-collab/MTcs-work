@@ -91,6 +91,9 @@ export function registerRoutes(httpServer: Server, app: Express): Server {
   app.post("/api/users", requireAdmin, async (req, res) => {
     const { password, ...rest } = req.body;
     if (!password) return res.status(400).json({ error: "Password required" });
+    // Check for duplicate email
+    const existing = storage.getUserByEmail(rest.email);
+    if (existing) return res.status(400).json({ error: "A user with that email already exists" });
     const hash = await bcrypt.hash(password, 10);
     const parsed = insertUserSchema.safeParse({ ...rest, passwordHash: hash });
     if (!parsed.success) return res.status(400).json({ error: parsed.error });
@@ -100,9 +103,19 @@ export function registerRoutes(httpServer: Server, app: Express): Server {
 
   app.patch("/api/users/:id", requireAdmin, async (req, res) => {
     const id = parseInt(req.params.id);
-    const { password, ...rest } = req.body;
-    const updates: any = { ...rest };
-    if (password) updates.passwordHash = await bcrypt.hash(password, 10);
+    const session = (req as any).session;
+    const { password, passwordHash: _ignored, ...rest } = req.body;
+    // Only allow safe fields to be updated
+    const updates: any = {
+      name: rest.name,
+      email: rest.email,
+      role: rest.role,
+      color: rest.color,
+    };
+    // Only hash+update password if a new one was provided
+    if (password && password.trim() !== "") {
+      updates.passwordHash = await bcrypt.hash(password, 10);
+    }
     const updated = storage.updateUser(id, updates);
     if (!updated) return res.status(404).json({ error: "User not found" });
     const { passwordHash, ...user } = updated;
@@ -110,7 +123,11 @@ export function registerRoutes(httpServer: Server, app: Express): Server {
   });
 
   app.delete("/api/users/:id", requireAdmin, (req, res) => {
-    storage.deleteUser(parseInt(req.params.id));
+    const id = parseInt(req.params.id);
+    const session = (req as any).session;
+    // Prevent admin from deleting themselves
+    if (id === session.userId) return res.status(400).json({ error: "You cannot delete your own account" });
+    storage.deleteUser(id);
     res.json({ success: true });
   });
 
