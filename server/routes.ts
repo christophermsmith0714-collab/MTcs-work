@@ -319,6 +319,21 @@ export function registerRoutes(httpServer: Server, app: Express): Server {
     res.json({ success: true });
   });
 
+  // ── Bulk actions ──────────────────────────────────────────────────────
+  app.post("/api/jobs/bulk-delete", requireAdmin, (req, res) => {
+    const { ids } = req.body as { ids: number[] };
+    if (!Array.isArray(ids) || ids.length === 0) return res.status(400).json({ error: "No ids provided" });
+    ids.forEach(id => storage.deleteJob(id));
+    res.json({ deleted: ids.length });
+  });
+
+  app.post("/api/jobs/bulk-assign", requireAdmin, (req, res) => {
+    const { ids, assignedTo } = req.body as { ids: number[]; assignedTo: number | null };
+    if (!Array.isArray(ids) || ids.length === 0) return res.status(400).json({ error: "No ids provided" });
+    ids.forEach(id => storage.updateJob(id, { assignedTo } as any));
+    res.json({ updated: ids.length });
+  });
+
   // ── Dashboard stats ───────────────────────────────────────────────────
   app.get("/api/dashboard/stats", requireAuth, (req, res) => {
     const session = (req as any).session;

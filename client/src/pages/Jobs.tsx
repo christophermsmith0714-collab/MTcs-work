@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
-import { Plus, Search, Filter, Pencil, Trash2, ChevronDown } from "lucide-react";
+import { Plus, Search, Pencil, Trash2, UserCheck, CheckSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -43,6 +43,8 @@ export default function Jobs() {
   const [filterAssignee, setFilterAssignee] = useState("all");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editJob, setEditJob] = useState<Job | null>(null);
+  const [selected, setSelected] = useState<Set<number>>(new Set());
+  const [bulkAssignUser, setBulkAssignUser] = useState<string>("none");
 
   const { data: jobs, isLoading } = useQuery<Job[]>({ queryKey: ["/api/jobs"] });
   const { data: clients } = useQuery<Client[]>({ queryKey: ["/api/clients"] });
@@ -94,6 +96,28 @@ export default function Jobs() {
     },
   });
 
+  const bulkDeleteMutation = useMutation({
+    mutationFn: (ids: number[]) => apiRequest("POST", "/api/jobs/bulk-delete", { ids }),
+    onSuccess: (_, ids) => {
+      queryClient.invalidateQueries({ queryKey: ["/api/jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard/stats"] });
+      setSelected(new Set());
+      toast({ title: `${ids.length} job${ids.length > 1 ? "s" : ""} deleted` });
+    },
+  });
+
+  const bulkAssignMutation = useMutation({
+    mutationFn: ({ ids, assignedTo }: { ids: number[]; assignedTo: number | null }) =>
+      apiRequest("POST", "/api/jobs/bulk-assign", { ids, assignedTo }),
+    onSuccess: (_, { ids }) => {
+      queryClient.invalidateQueries({ queryKey: ["/api/jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard/stats"] });
+      setSelected(new Set());
+      setBulkAssignUser("none");
+      toast({ title: `${ids.length} job${ids.length > 1 ? "s" : ""} reassigned` });
+    },
+  });
+
   const statusMutation = useMutation({
     mutationFn: ({ id, status }: { id: number; status: string }) =>
       apiRequest("PATCH", `/api/jobs/${id}`, { status }),
@@ -103,6 +127,14 @@ export default function Jobs() {
       queryClient.invalidateQueries({ queryKey: ["/api/activity"] });
     },
   });
+
+  const toggleOne = (id: number) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
 
   const openAdd = () => {
     setEditJob(null);
@@ -129,7 +161,7 @@ export default function Jobs() {
     }
   };
 
-  const filtered = jobs?.filter((j) => {
+  const filtered = (jobs?.filter((j) => {
     const client = clientMap.get(j.clientId);
     const matchSearch = !search ||
       j.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -138,7 +170,19 @@ export default function Jobs() {
     const matchType = filterType === "all" || j.jobType === filterType;
     const matchAssignee = filterAssignee === "all" || String(j.assignedTo) === filterAssignee;
     return matchSearch && matchStatus && matchType && matchAssignee;
-  }) ?? [];
+  }) ?? []);
+
+  const allFilteredIds = filtered.map((j) => j.id);
+  const allSelected = allFilteredIds.length > 0 && allFilteredIds.every((id) => selected.has(id));
+  const someSelected = selected.size > 0;
+
+  const toggleAll = () => {
+    if (allSelected) {
+      setSelected(new Set());
+    } else {
+      setSelected(new Set(allFilteredIds));
+    }
+  };
 
   return (
     <div className="p-6 space-y-5">
@@ -148,6 +192,53 @@ export default function Jobs() {
           <Plus className="w-4 h-4 mr-1" /> Add Job
         </Button>
       </div>
+
+      {/* Bulk Action Toolbar */}
+      {someSelected && (
+        <div className="flex items-center gap-3 px-4 py-2.5 bg-primary/10 border border-primary/20 rounded-xl">
+          <span className="text-sm font-medium text-primary">{selected.size} selected</span>
+          <div className="flex-1" />
+          {/* Bulk Assign */}
+          <div className="flex items-center gap-2">
+            <UserCheck className="w-4 h-4 text-muted-foreground" />
+            <Select value={bulkAssignUser} onValueChange={setBulkAssignUser}>
+              <SelectTrigger className="h-8 text-sm w-44">
+                <SelectValue placeholder="Assign to..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Unassigned</SelectItem>
+                {users?.map((u) => <SelectItem key={u.id} value={String(u.id)}>{u.name}</SelectItem>)}
+              </SelectContent>
+            </Select>
+            <Button
+              size="sm" variant="outline" className="h-8"
+              disabled={bulkAssignMutation.isPending}
+              onClick={() => {
+                const ids = Array.from(selected);
+                const assignedTo = bulkAssignUser === "none" ? null : parseInt(bulkAssignUser);
+                bulkAssignMutation.mutate({ ids, assignedTo });
+              }}
+            >
+              {bulkAssignMutation.isPending ? "Saving..." : "Apply"}
+            </Button>
+          </div>
+          <div className="w-px h-5 bg-border" />
+          {/* Bulk Delete */}
+          <Button
+            size="sm" variant="destructive" className="h-8"
+            disabled={bulkDeleteMutation.isPending}
+            onClick={() => {
+              if (confirm(`Delete ${selected.size} job${selected.size > 1 ? "s" : ""}? This cannot be undone.`)) {
+                bulkDeleteMutation.mutate(Array.from(selected));
+              }
+            }}
+          >
+            <Trash2 className="w-3.5 h-3.5 mr-1" />
+            {bulkDeleteMutation.isPending ? "Deleting..." : `Delete ${selected.size}`}
+          </Button>
+          <Button size="sm" variant="ghost" className="h-8" onClick={() => setSelected(new Set())}>Cancel</Button>
+        </div>
+      )}
 
       {/* Filters */}
       <div className="flex gap-2 flex-wrap">
@@ -191,6 +282,14 @@ export default function Jobs() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border text-muted-foreground text-xs">
+                  <th className="px-4 py-2.5 w-8">
+                    <input
+                      type="checkbox"
+                      checked={allSelected}
+                      onChange={toggleAll}
+                      className="w-3.5 h-3.5 rounded accent-primary cursor-pointer"
+                    />
+                  </th>
                   <th className="text-left px-4 py-2.5 font-medium">Job</th>
                   <th className="text-left px-4 py-2.5 font-medium">Client</th>
                   <th className="text-left px-4 py-2.5 font-medium">Type</th>
@@ -204,10 +303,10 @@ export default function Jobs() {
               <tbody className="divide-y divide-border">
                 {isLoading ? (
                   [...Array(8)].map((_, i) => (
-                    <tr key={i}><td colSpan={8} className="px-4 py-3"><Skeleton className="h-4 w-full" /></td></tr>
+                    <tr key={i}><td colSpan={9} className="px-4 py-3"><Skeleton className="h-4 w-full" /></td></tr>
                   ))
                 ) : filtered.length === 0 ? (
-                  <tr><td colSpan={8} className="px-4 py-10 text-center text-muted-foreground">No jobs found</td></tr>
+                  <tr><td colSpan={9} className="px-4 py-10 text-center text-muted-foreground">No jobs found</td></tr>
                 ) : filtered.map((job) => {
                   const client = clientMap.get(job.clientId);
                   const assignee = job.assignedTo ? userMap.get(job.assignedTo) : null;
@@ -216,7 +315,15 @@ export default function Jobs() {
                   const currentStatusIdx = STATUSES.indexOf(job.status);
 
                   return (
-                    <tr key={job.id} className="hover:bg-secondary/30 transition-colors" data-testid={`job-row-${job.id}`}>
+                    <tr key={job.id} className={`hover:bg-secondary/30 transition-colors ${selected.has(job.id) ? "bg-primary/5" : ""}`} data-testid={`job-row-${job.id}`}>
+                      <td className="px-4 py-3 w-8">
+                        <input
+                          type="checkbox"
+                          checked={selected.has(job.id)}
+                          onChange={() => toggleOne(job.id)}
+                          className="w-3.5 h-3.5 rounded accent-primary cursor-pointer"
+                        />
+                      </td>
                       <td className="px-4 py-3">
                         <div className="font-medium text-foreground">{job.title}</div>
                         {job.priority === "High" && <span className="text-[10px] text-red-400">High Priority</span>}
