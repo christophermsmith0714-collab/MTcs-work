@@ -6,6 +6,29 @@ import bcrypt from "bcryptjs";
 import fs from "fs";
 import path from "path";
 
+export async function runStartupSeed() {
+  try {
+    // Always ensure admin account exists
+    const admin = storage.getUserByEmail("chris@mtcs.com");
+    if (!admin) {
+      const hash = await bcrypt.hash("mtcs2024", 10);
+      storage.createUser({ name: "Chris", email: "chris@mtcs.com", passwordHash: hash, role: "admin", color: "#4F98A3" });
+      console.log("[seed] Admin account created");
+    }
+    // Seed clients + jobs if empty
+    const existing = storage.getClients();
+    if (existing.length === 0) {
+      const clientsPath = path.join(process.cwd(), "seed_clients.json");
+      const jobsPath = path.join(process.cwd(), "seed_jobs.json");
+      if (fs.existsSync(clientsPath)) storage.bulkInsertClients(JSON.parse(fs.readFileSync(clientsPath, "utf-8")));
+      if (fs.existsSync(jobsPath)) storage.bulkInsertJobs(JSON.parse(fs.readFileSync(jobsPath, "utf-8")));
+      console.log("[seed] Clients and jobs seeded");
+    }
+  } catch (err) {
+    console.error("[seed] Startup seed failed:", err);
+  }
+}
+
 function randomToken() {
   return Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
 }
