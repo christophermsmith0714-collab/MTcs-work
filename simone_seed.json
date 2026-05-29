@@ -1,0 +1,2414 @@
+[
+  {
+    "company": "City of Chanute",
+    "location": "Airport",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2021-01-01",
+    "dueDate": "2026-01-01"
+  },
+  {
+    "company": "Freeman Holdings",
+    "location": "Lake Charles",
+    "state": "LA",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2021-01-01",
+    "dueDate": "2026-01-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Pueblo",
+    "state": "CO",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan- Recommendations",
+    "issuedDate": "2023-01-01",
+    "dueDate": "2026-01-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "St George",
+    "state": "UT",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Did not do SPCC Plan",
+    "issuedDate": "2023-01-01",
+    "dueDate": "2026-01-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Alexandria",
+    "state": "LA",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-01-01",
+    "dueDate": "2026-01-01"
+  },
+  {
+    "company": "Miami County",
+    "location": "Paola",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-01-01",
+    "dueDate": "2026-01-01"
+  },
+  {
+    "company": "City of Nevada",
+    "location": "Nevada",
+    "state": "MO",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2021-02-01",
+    "dueDate": "2026-02-01"
+  },
+  {
+    "company": "Heartland Aviation",
+    "location": "Manhattan",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2021-02-01",
+    "dueDate": "2026-02-01"
+  },
+  {
+    "company": "City of Butler",
+    "location": "Butler",
+    "state": "MO",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-02-01",
+    "dueDate": "2027-02-01"
+  },
+  {
+    "company": "Comanche County",
+    "location": "Clearwater",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-02-01",
+    "dueDate": "2027-02-01"
+  },
+  {
+    "company": "City of Ashland",
+    "location": "Ashland",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-02-01",
+    "dueDate": "2028-02-01"
+  },
+  {
+    "company": "Moyer Aviation",
+    "location": "Ulysses",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-02-01",
+    "dueDate": "2028-02-01"
+  },
+  {
+    "company": "Equity Aviation",
+    "location": "New Century",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-02-01",
+    "dueDate": "2029-02-01"
+  },
+  {
+    "company": "Vaerus Aviation Inc",
+    "location": "Topeka",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-02-01",
+    "dueDate": "2029-02-01"
+  },
+  {
+    "company": "City of Fort Scott",
+    "location": "Fort Scott",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-03-01",
+    "dueDate": "2027-03-01"
+  },
+  {
+    "company": "City of Garnett",
+    "location": "Garnett",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-03-01",
+    "dueDate": "2027-03-01"
+  },
+  {
+    "company": "City of Abilene",
+    "location": "Abilene",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-03-01",
+    "dueDate": "2028-03-01"
+  },
+  {
+    "company": "Kansas Hangar Properties",
+    "location": "New Century",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-03-01",
+    "dueDate": "2029-03-01"
+  },
+  {
+    "company": "City of Wellington",
+    "location": "Wellington",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-03-01",
+    "dueDate": "2030-03-01"
+  },
+  {
+    "company": "City of Oberlin",
+    "location": "Oberlin",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-04-01",
+    "dueDate": "2027-04-01"
+  },
+  {
+    "company": "Kansas Jet Center",
+    "location": "Manhattan",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-04-01",
+    "dueDate": "2027-04-01"
+  },
+  {
+    "company": "City of Emporia",
+    "location": "Emporia",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-04-01",
+    "dueDate": "2028-04-01"
+  },
+  {
+    "company": "City of Sabetha",
+    "location": "Sabetha",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-04-01",
+    "dueDate": "2029-04-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Tucson",
+    "state": "AZ",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-04-01",
+    "dueDate": "2029-04-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Victorville",
+    "state": "CA",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-04-01",
+    "dueDate": "2030-04-01"
+  },
+  {
+    "company": "Allen County",
+    "location": "Iola",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2021-05-01",
+    "dueDate": "2026-05-01"
+  },
+  {
+    "company": "Advanced Aviation",
+    "location": "New Century",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-05-01",
+    "dueDate": "2027-05-01"
+  },
+  {
+    "company": "City of Dexter",
+    "location": "Dexter",
+    "state": "MO",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-05-01",
+    "dueDate": "2029-05-01"
+  },
+  {
+    "company": "North Star Aviation",
+    "location": "Ulysses",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2021-06-01",
+    "dueDate": "2026-06-01"
+  },
+  {
+    "company": "Bringham Flying Service",
+    "location": "Meade",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2021-06-01",
+    "dueDate": "2026-06-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Orlando",
+    "state": "FL",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-06-01",
+    "dueDate": "2029-06-01"
+  },
+  {
+    "company": "City of Winterset",
+    "location": "Winterset",
+    "state": "IA",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-06-01",
+    "dueDate": "2030-06-01"
+  },
+  {
+    "company": "Copenhaven Aerial",
+    "location": "Anthony",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-06-01",
+    "dueDate": "2030-06-01"
+  },
+  {
+    "company": "Kearney County",
+    "location": "Lakin",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-06-01",
+    "dueDate": "2030-06-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Medford",
+    "state": "OR",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2026-07-01",
+    "dueDate": "2026-07-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Arcardia",
+    "state": "LA",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-07-01",
+    "dueDate": "2027-07-01"
+  },
+  {
+    "company": "City of Atchison",
+    "location": "Atchison",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-07-01",
+    "dueDate": "2030-07-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Lubbock",
+    "state": "TX",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-07-01",
+    "dueDate": "2030-07-01"
+  },
+  {
+    "company": "City of Coffeyville",
+    "location": "Coffeyville",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-07-01",
+    "dueDate": "2030-07-01"
+  },
+  {
+    "company": "City of Higginsville",
+    "location": "Higginsville",
+    "state": "MO",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-08-01",
+    "dueDate": "2027-08-01"
+  },
+  {
+    "company": "City of Neodesha",
+    "location": "Neodesha",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-08-01",
+    "dueDate": "2027-08-01"
+  },
+  {
+    "company": "Clemons Aviation",
+    "location": "Wichita",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-08-01",
+    "dueDate": "2027-08-01"
+  },
+  {
+    "company": "Roots Spraying",
+    "location": "Harper",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-08-01",
+    "dueDate": "2028-08-01"
+  },
+  {
+    "company": "City of Chillicothe",
+    "location": "Chillicothe",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-08-01",
+    "dueDate": "2029-08-01"
+  },
+  {
+    "company": "City of Colby Airport",
+    "location": "Colby",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-08-01",
+    "dueDate": "2030-08-01"
+  },
+  {
+    "company": "Million Air - Chenault",
+    "location": "Lake Charles",
+    "state": "LA",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-08-01",
+    "dueDate": "2030-08-01"
+  },
+  {
+    "company": "Rawlins County",
+    "location": "Atwood",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-08-01",
+    "dueDate": "2030-08-01"
+  },
+  {
+    "company": "Rooks County",
+    "location": "Stocton",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2021-09-01",
+    "dueDate": "2026-09-01"
+  },
+  {
+    "company": "Norton County",
+    "location": "Norton",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2021-09-01",
+    "dueDate": "2026-09-01"
+  },
+  {
+    "company": "Scotts Precision AG",
+    "location": "Oberlin",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2021-09-01",
+    "dueDate": "2026-09-01"
+  },
+  {
+    "company": "Butterfly Aviation",
+    "location": "Goodland",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-09-01",
+    "dueDate": "2028-09-01"
+  },
+  {
+    "company": "City of Beloit",
+    "location": "Beloit",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-09-01",
+    "dueDate": "2028-09-01"
+  },
+  {
+    "company": "City of Oakley",
+    "location": "Oakley",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-09-01",
+    "dueDate": "2028-09-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Moses Lake",
+    "state": "WA",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-09-01",
+    "dueDate": "2028-09-01"
+  },
+  {
+    "company": "Anderson Aerial",
+    "location": "Russel",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-09-01",
+    "dueDate": "2028-09-01"
+  },
+  {
+    "company": "Boettcher Aerial",
+    "location": "Beloit",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-09-01",
+    "dueDate": "2028-09-01"
+  },
+  {
+    "company": "Roots Spraying",
+    "location": "Dighton",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-09-01",
+    "dueDate": "2028-09-01"
+  },
+  {
+    "company": "City of Poplar Bluff",
+    "location": "Popular Bluff",
+    "state": "MO",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-10-01",
+    "dueDate": "2028-10-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Pineville",
+    "state": "LA",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-10-01",
+    "dueDate": "2029-10-01"
+  },
+  {
+    "company": "Hoxie Flying Service",
+    "location": "Hoxie",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-10-01",
+    "dueDate": "2029-10-01"
+  },
+  {
+    "company": "Syracuse - Hamilton Airport",
+    "location": "Syrcruse",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-10-01",
+    "dueDate": "2029-10-01"
+  },
+  {
+    "company": "Bird Dog Aviation",
+    "location": "Stockton",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-10-01",
+    "dueDate": "2029-10-01"
+  },
+  {
+    "company": "Great Plains Spraying",
+    "location": "Colby",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-10-01",
+    "dueDate": "2029-10-01"
+  },
+  {
+    "company": "MTAA - Forbes",
+    "location": "Topeka",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-11-01",
+    "dueDate": "2028-11-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Waco",
+    "state": "TX",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2025-11-01",
+    "dueDate": "2030-11-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Yuma",
+    "state": "AZ",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2022-12-01",
+    "dueDate": "2027-12-01"
+  },
+  {
+    "company": "City of Ottawa",
+    "location": "Ottawa",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-12-01",
+    "dueDate": "2028-12-01"
+  },
+  {
+    "company": "MTAA - Phillip Ballard",
+    "location": "Topeka",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-12-01",
+    "dueDate": "2028-12-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Topeka",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2023-12-01",
+    "dueDate": "2028-12-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Abilene",
+    "state": "TX",
+    "jobType": "SPCC Plan",
+    "title": "We did not do SPCC PLAN",
+    "issuedDate": "2023-12-01",
+    "dueDate": "2028-12-01"
+  },
+  {
+    "company": "KCAC",
+    "location": "Olathe",
+    "state": "KS",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-12-01",
+    "dueDate": "2029-12-01"
+  },
+  {
+    "company": "Million Air",
+    "location": "Syracuse",
+    "state": "NY",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - Recommendations",
+    "issuedDate": "2024-12-01",
+    "dueDate": "2029-12-01"
+  },
+  {
+    "company": "REVV Aviation",
+    "location": "Council Bluffs",
+    "state": "IA",
+    "jobType": "SPCC Plan",
+    "title": "SPCC Plan - 5 year review",
+    "issuedDate": "2025-10-01",
+    "dueDate": "2026-10-01"
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Advanced Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "AG Solutions",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "AG Solutions",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "AG Solutions",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Airtek Services",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Airtek Services",
+    "location": "",
+    "state": "AG Solutions",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Allen County",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Anderson Aerial",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Bird Dog Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Boettcher Aerial",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Bringham Flying Service",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Butterfly Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Abilene",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Ashland",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Atchison",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Beloit",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Belleville",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Butler",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Chanute",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Chillicothe",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Council Bluffs",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Emporia",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Fort Scott",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Garnett",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Higginsville",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Manhattan",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Neodesha",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Nevada",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Oakley",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Oberlin",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Ottawa",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Parsons",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Pittsburg",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Poplar Bluff",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Sabetha",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Winterset",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Clemons Aviation",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Comanche County",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Copenhaven Aerial",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Equity Aviation",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Freeman Holdings",
+    "location": "",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Freeman Holdings",
+    "location": "",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Freeman Jet Center",
+    "location": "chris freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "GARMIN",
+    "location": "Airports",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Great Plains Spraying",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Heartland Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "HiPlains Aviation",
+    "location": "City of Colby",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Hoxie Sprayers",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Hoxie Flying Service",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Kansas Hangar Properties",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Kansas Jet Center",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "KCAC",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "MTAA - Forbes",
+    "location": "MTAA",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Miami County",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Acadina Airport",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "chris freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "chris freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Joe Scott Jr",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "chris freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "chris freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "chris freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "chris freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Ash Vij",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "chris freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "chris freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Moyer Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "North Star Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Norton County",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "FTI Aviation Fuels",
+    "location": "OJC",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Rawlins County",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "REVV Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Rooks County",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Roots Spraying",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Roots Spraying",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Scotts Precision AG",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR-S",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Syracuse - Hamilton Airport",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Taney County",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Vaerus Aviation Inc",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Dexter",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Kearney County",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Chris Freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "REVV Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "REVV Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "REVV Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "REVV Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "REVV Aviation",
+    "location": "",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air -Bozeman",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Harold Lee",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air -Dallas",
+    "location": "Don Rickenhauser",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Paul Foster",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air - Florida Keys",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Chris Freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Gene Mcdonough",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air - Riverside",
+    "location": "Chris Freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Chris Freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Matt Fressler",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air - Stennis",
+    "location": "Chris Freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "Chris Freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "RW",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Freeman Jet Center",
+    "location": "Chris Freeman",
+    "state": "Million Air",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Coffeyville",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Wellington",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "MTAA - Forbes",
+    "location": "MTAA",
+    "state": "Phillip Ballard",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Lawrence",
+    "location": "Airport",
+    "state": "",
+    "jobType": "Other",
+    "title": "AIR",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Washington County Airport",
+    "location": "12225 E State Hwy 58",
+    "state": "Mineral Point",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "2040 Milligan Way #100",
+    "state": "Medford",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "2841 Flightline",
+    "state": "Orlando",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Freeman Holdings",
+    "location": "500 Airport Blvd",
+    "state": "Lake Charles",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Freeman Holdings",
+    "location": "7615 Esler Field",
+    "state": "Pineville",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "1303 Billy Mitchell",
+    "state": "Alexandria",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "1404 Hangar Drive",
+    "state": "New Iberia",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "4500 Chenault Pkwy",
+    "state": "Lake Charles",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "6340 N Cedar Ave",
+    "state": "Lubbock",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Garnett",
+    "location": "1200 E 4th Street",
+    "state": "Garnett",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Ottawa",
+    "location": "2178 Montana Road",
+    "state": "Ottawa",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Pittsburg",
+    "location": "3150 Airport Road",
+    "state": "Pittsburg",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Sabetha",
+    "location": "23 Airport Road",
+    "state": "Sabetha",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Clemons Aviation",
+    "location": "3628 N Jabara",
+    "state": "Witchita",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Coffey County",
+    "location": "1899 US Hwy 75",
+    "state": "Burlington",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Comanche County",
+    "location": "1625 US 160 Hwy",
+    "state": "Clearwater",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Copenhaver Aerial",
+    "location": "224 W State Road 2",
+    "state": "Anthony",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Equity Aviation",
+    "location": "446 Highland Drive",
+    "state": "New Century",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Heartland Aviation",
+    "location": "1725 S Airport Road #5",
+    "state": "Manhattan",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "HiPlains Aviation",
+    "location": "5 Airport Plz",
+    "state": "Colby",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Hoxie Flying Service",
+    "location": "1511 Ball Park",
+    "state": "Park",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Hoxie Sprayers",
+    "location": "1543 Ball Park",
+    "state": "Hoxie",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Kansas Hangar Properties",
+    "location": "45 Leawood",
+    "state": "New Century",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Kansas Jet Center",
+    "location": "1725 Airport Road",
+    "state": "Manhattan",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "KCAC",
+    "location": "15345 S Pflumn",
+    "state": "Olathe",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "MTAA - Forbes",
+    "location": "6510 SE Forbes Avenue",
+    "state": "Topeka",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Miami County",
+    "location": "32580 Airport Road",
+    "state": "Paola",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Million Air",
+    "location": "6700 SW Topeka Blvd",
+    "state": "Topeka",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Moyer Aviation",
+    "location": "1752 W 10 Road",
+    "state": "Ulysses",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "North Star Aviation",
+    "location": "801 Airport Blvd",
+    "state": "Ulysses",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Norton County",
+    "location": "1226 State Avenue",
+    "state": "Norton",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Rawlins County",
+    "location": "12323 KS-25",
+    "state": "Atwood",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Rooks County",
+    "location": "721 P Road",
+    "state": "Stockton",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Syracuse - Hamilton Airport",
+    "location": "Airport",
+    "state": "Syracuse",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Vaerus Aviation Inc",
+    "location": "6410 SE Forbes Avenue",
+    "state": "Topeka",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Coffeyville",
+    "location": "Coffeyville",
+    "state": "Coffeyville",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "FTI Aviation Fuels",
+    "location": "12921 W 151st St. Suite 201",
+    "state": "Olathe",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Great Plains Spraying",
+    "location": "51 Airport Plaza",
+    "state": "Colby",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Roots Spraying",
+    "location": "151 N 7th Street",
+    "state": "Dighton",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Roots Spraying",
+    "location": "Highway 14",
+    "state": "Harper",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Scotts Precision AG",
+    "location": "Oberlin Airport",
+    "state": "Oberlin",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Advanced Aviation",
+    "location": "5 Aero Plaza",
+    "state": "New Century",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Allen County",
+    "location": "1705 Minnesota",
+    "state": "Iola",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Butterfly Aviation",
+    "location": "602 Renner Field Rd",
+    "state": "Goodland",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Abilene",
+    "location": "419 N Broadway Street",
+    "state": "Abilene",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Ashland",
+    "location": "2151 County Road 20",
+    "state": "Ashland",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Atchison",
+    "location": "16701 286th Road",
+    "state": "Atchison",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Beloit",
+    "location": "1520 W 8th Street",
+    "state": "Beloit",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Belleville",
+    "location": "Hwy 36",
+    "state": "Belleville",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Chanute",
+    "location": "800 S Country Club Road",
+    "state": "Chanute",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Emporia",
+    "location": "1005 County Road 120",
+    "state": "Emporia",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Fort Scott",
+    "location": "1869 Indian Road",
+    "state": "Fort Scott",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Neodesha",
+    "location": "4331 Hwy 75",
+    "state": "Neodesha",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Oakley",
+    "location": "210 Airport Driver",
+    "state": "Oakley",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Oberlin",
+    "location": "1832 Hwy 83",
+    "state": "Oberlin",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Parsons",
+    "location": "163 24000 Road",
+    "state": "Cherryvale",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "MTAA - Forbes",
+    "location": "6510 SE Forbes Avenue",
+    "state": "Topeka",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Kearney County",
+    "location": "",
+    "state": "Lakin",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Wellington",
+    "location": "441 N West Road",
+    "state": "Wellington",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "City of Lawrence",
+    "location": "",
+    "state": "Lawrence",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "1120 Cole Street",
+    "state": "Moundridge",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "201 Airport Drive",
+    "state": "Oakley",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "300 S Mesquite Road",
+    "state": "Scott City",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "40110 County Blvd",
+    "state": "Pratt",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "610 Renner Field",
+    "state": "Goodland",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "A+ Aviation",
+    "location": "Haviland Airport",
+    "state": "Haviland",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "AG Solutions",
+    "location": "1755 S Air Service Road",
+    "state": "Garden City",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "AG Solutions",
+    "location": "300 S Mesquite Road",
+    "state": "Scott City",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "AG Solutions",
+    "location": "",
+    "state": "Santanta",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Airtek Services",
+    "location": "1458 US Hwy 56",
+    "state": "Lyons",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Airtek Services",
+    "location": "201 Airport Drive",
+    "state": "Oakley",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Anderson Aerial",
+    "location": "4231 Airport Terrace",
+    "state": "Russel",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Bird Dog Aviation",
+    "location": "1721 P Road",
+    "state": "Stockton",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Boettcher Aerial",
+    "location": "1520 W 8th Street",
+    "state": "Beloit",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  },
+  {
+    "company": "Bringham Flying Service",
+    "location": "1409 W Carthage",
+    "state": "Meade",
+    "jobType": "Other",
+    "title": "Active",
+    "issuedDate": null,
+    "dueDate": null
+  }
+]

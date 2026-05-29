@@ -104,6 +104,62 @@ export function registerRoutes(httpServer: Server, app: Express): Server {
     }
   });
 
+  // ── Simone seed ──────────────────────────────────────────────────────
+  app.post("/api/seed/simone", requireAdmin, async (req, res) => {
+    try {
+      const dataPath = path.join(process.cwd(), "simone_seed.json");
+      if (!fs.existsSync(dataPath)) return res.status(404).json({ error: "simone_seed.json not found" });
+      const jobs: any[] = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+
+      // Find Simone's user account (by name, case-insensitive)
+      const allUsers = storage.getUsers();
+      const simone = allUsers.find(u => u.name.toLowerCase().includes("simone"));
+      if (!simone) return res.status(404).json({ error: "Simone not found — please create her account in Team first" });
+
+      const now = new Date().toISOString();
+      let created = 0;
+      let clientsCreated = 0;
+
+      for (const job of jobs) {
+        // Find or create client by company name (case-insensitive match)
+        const allClients = storage.getClients();
+        let client = allClients.find(c =>
+          c.company.toLowerCase().trim() === job.company.toLowerCase().trim()
+        );
+        if (!client) {
+          client = storage.createClient({
+            company: job.company,
+            status: "Active",
+            subLocation: job.location || null,
+            state: job.state || null,
+          } as any);
+          clientsCreated++;
+        }
+
+        storage.createJob({
+          clientId: client.id,
+          jobType: job.jobType,
+          title: job.title,
+          description: null,
+          dueDate: job.dueDate || null,
+          scheduleDate: null,
+          originalDate: job.issuedDate || null,
+          status: "Upcoming",
+          assignedTo: simone.id,
+          priority: "Normal",
+          notes: null,
+          createdAt: now,
+          createdBy: simone.id,
+        } as any);
+        created++;
+      }
+
+      res.json({ message: `Seeded ${created} jobs for Simone (${clientsCreated} new clients created)` });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   // ── Users ─────────────────────────────────────────────────────────────
   app.get("/api/users", requireAuth, (_req, res) => {
     // Return users without passwordHash
