@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
-import { Briefcase, AlertTriangle, Clock, Users, CheckCircle2, CalendarClock, ArrowRight, Send, RotateCcw } from "lucide-react";
+import { Briefcase, AlertTriangle, Clock, Users, CheckCircle2, CalendarClock, ArrowRight, Send, RotateCcw, CalendarDays, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
@@ -103,14 +103,15 @@ function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssig
   }
 
   const cols = showAssigned
-    ? "grid-cols-[2.5fr_1.5fr_1fr_1fr_1fr_1fr]"
-    : "grid-cols-[2.5fr_1.5fr_1fr_1fr_1fr]";
+    ? "grid-cols-[2.5fr_1.5fr_1fr_1fr_1fr_1fr_1fr]"
+    : "grid-cols-[2.5fr_1.5fr_1fr_1fr_1fr_1fr]";
 
   return (
     <div className="divide-y divide-border">
       {jobs.map((job) => {
         const client = clientMap.get(job.clientId);
         const due = job.dueDate ? new Date(job.dueDate) : null;
+        const sched = job.scheduleDate ? new Date(job.scheduleDate) : null;
         const isOverdue = due ? isPast(due) && job.status !== "Completed" : false;
         const assignee = job.assignedTo ? userMap.get(job.assignedTo) : null;
 
@@ -125,6 +126,9 @@ function JobTable({ jobs, clientMap, userMap, statusMutation, isAdmin, showAssig
             <span className="text-sm text-muted-foreground truncate">{client?.company ?? "—"}</span>
             <span className={`text-xs font-medium ${isOverdue ? "text-red-400" : "text-foreground"}`}>
               {due ? format(due, "MMM d, yyyy") : "—"}
+            </span>
+            <span className="text-xs font-medium text-muted-foreground">
+              {sched ? format(sched, "MMM d, yyyy") : "—"}
             </span>
             <div>{typeLabel(job.jobType)}</div>
             <div>
@@ -182,13 +186,14 @@ function TableHeader({ showAssigned, isCompleted }: { showAssigned: boolean; isC
     );
   }
   const cols = showAssigned
-    ? "grid-cols-[2.5fr_1.5fr_1fr_1fr_1fr_1fr]"
-    : "grid-cols-[2.5fr_1.5fr_1fr_1fr_1fr]";
+    ? "grid-cols-[2.5fr_1.5fr_1fr_1fr_1fr_1fr_1fr]"
+    : "grid-cols-[2.5fr_1.5fr_1fr_1fr_1fr_1fr]";
   return (
     <div className={`grid gap-2 px-5 py-2 border-b border-border text-[11px] text-muted-foreground font-medium uppercase tracking-wide ${cols}`}>
       <span>Job Name</span>
       <span>Client</span>
       <span>Due Date</span>
+      <span>Schedule Date</span>
       <span>Type</span>
       <span>Status</span>
       {showAssigned && <span>Assigned</span>}
@@ -214,7 +219,7 @@ export default function Dashboard() {
   // Completion dialog state
   const [completeDialog, setCompleteDialog] = useState<{ job: Job; renewDate: string; hours: string; miles: string } | null>(null);
 
-  const { data: stats, isLoading: statsLoading } = useQuery<{ activeJobs: number; dueThisWeek: number; overdue: number; totalClients: number }>({
+  const { data: stats, isLoading: statsLoading } = useQuery<{ dueThisWeek: number; overdue: number; dueThisMonth: number; dueThisQuarter: number; dueThisYear: number }>({
     queryKey: ["/api/dashboard/stats"],
   });
 
@@ -363,19 +368,20 @@ export default function Dashboard() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-5 gap-3">
         {[
-          { label: isAdmin ? "Active Jobs" : "My Active Jobs", value: stats?.activeJobs, icon: Briefcase, glowClass: "icon-glow-teal", bgClass: "bg-primary/10 border border-primary/20", iconClass: "text-primary", valueClass: "text-foreground", sparkUp: true, sparkColor: "#3BADA0" },
           { label: "Due This Week", value: stats?.dueThisWeek, icon: Clock, glowClass: "icon-glow-orange", bgClass: "bg-orange-500/10 border border-orange-500/20", iconClass: "text-orange-400", valueClass: "text-orange-400", sparkUp: false, sparkColor: "#F59E0B" },
           { label: "Overdue", value: stats?.overdue, icon: AlertTriangle, glowClass: "icon-glow-red", bgClass: "bg-red-500/10 border border-red-500/20", iconClass: "text-red-400", valueClass: "text-red-400", sparkUp: false, sparkColor: "#EF4444" },
-          { label: isAdmin ? "Active Clients" : "Total Clients", value: stats?.totalClients, icon: Users, glowClass: "icon-glow-teal", bgClass: "bg-primary/10 border border-primary/20", iconClass: "text-primary", valueClass: "text-foreground", sparkUp: true, sparkColor: "#3BADA0" },
+          { label: "Due This Month", value: stats?.dueThisMonth, icon: CalendarDays, glowClass: "icon-glow-teal", bgClass: "bg-primary/10 border border-primary/20", iconClass: "text-primary", valueClass: "text-foreground", sparkUp: true, sparkColor: "#3BADA0" },
+          { label: "Due This Quarter", value: stats?.dueThisQuarter, icon: CalendarClock, glowClass: "icon-glow-teal", bgClass: "bg-primary/10 border border-primary/20", iconClass: "text-primary", valueClass: "text-foreground", sparkUp: true, sparkColor: "#3BADA0" },
+          { label: "This Year", value: stats?.dueThisYear, icon: TrendingUp, glowClass: "icon-glow-teal", bgClass: "bg-primary/10 border border-primary/20", iconClass: "text-primary", valueClass: "text-foreground", sparkUp: true, sparkColor: "#3BADA0" },
         ].map(({ label, value, icon, glowClass, bgClass, iconClass, valueClass, sparkUp, sparkColor }) => (
-          <div key={label} className="bg-card border border-border rounded-xl p-4 flex items-center gap-4">
+          <div key={label} className="bg-card border border-border rounded-xl p-4 flex items-center gap-3">
             <KpiIcon icon={icon} glowClass={glowClass} bgClass={bgClass} iconClass={iconClass} />
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-muted-foreground mb-0.5">{label}</p>
-              {statsLoading ? <Skeleton className="h-8 w-16" /> : (
-                <p className={`text-4xl font-bold leading-none ${valueClass}`}>{value ?? 0}</p>
+              <p className="text-xs text-muted-foreground mb-0.5 leading-tight">{label}</p>
+              {statsLoading ? <Skeleton className="h-8 w-12" /> : (
+                <p className={`text-3xl font-bold leading-none ${valueClass}`}>{value ?? 0}</p>
               )}
             </div>
             <Sparkline color={sparkColor} up={sparkUp} />

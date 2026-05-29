@@ -46,7 +46,7 @@ sqlite.exec(`
     client_id INTEGER NOT NULL,
     job_type TEXT NOT NULL,
     title TEXT NOT NULL,
-    description TEXT, due_date TEXT,
+    description TEXT, due_date TEXT, schedule_date TEXT,
     original_date TEXT, five_yr_anniversary TEXT, renewal_note TEXT,
     status TEXT NOT NULL DEFAULT 'Not Started',
     assigned_to INTEGER,
@@ -70,6 +70,7 @@ try { sqlite.exec(`ALTER TABLE users ADD COLUMN password_hash TEXT NOT NULL DEFA
 try { sqlite.exec(`ALTER TABLE jobs ADD COLUMN created_by INTEGER`); } catch {}
 try { sqlite.exec(`ALTER TABLE jobs ADD COLUMN hours_spent TEXT`); } catch {}
 try { sqlite.exec(`ALTER TABLE jobs ADD COLUMN miles_driven TEXT`); } catch {}
+try { sqlite.exec(`ALTER TABLE jobs ADD COLUMN schedule_date TEXT`); } catch {}
 
 export interface IStorage {
   // Sessions
@@ -96,7 +97,7 @@ export interface IStorage {
   updateJob(id: number, data: Partial<InsertJob>): Job | undefined;
   deleteJob(id: number): void;
 
-  getDashboardStats(assignedTo?: number): { activeJobs: number; dueThisWeek: number; overdue: number; totalClients: number };
+  getDashboardStats(assignedTo?: number): { dueThisWeek: number; overdue: number; dueThisMonth: number; dueThisQuarter: number; dueThisYear: number };
   getActivity(limit?: number): Activity[];
   logActivity(data: InsertActivity): Activity;
   bulkInsertClients(data: InsertClient[]): void;
@@ -190,14 +191,23 @@ export class Storage implements IStorage {
   }
 
   getDashboardStats(assignedTo?: number) {
-    const today = new Date().toISOString().split("T")[0];
-    const weekOut = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
+    const now = new Date();
+    const today = now.toISOString().split("T")[0];
+    const weekOut = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
+    // End of this month
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split("T")[0];
+    // End of this quarter
+    const quarterEndMonth = Math.floor(now.getMonth() / 3) * 3 + 2;
+    const endOfQuarter = new Date(now.getFullYear(), quarterEndMonth + 1, 0).toISOString().split("T")[0];
+    // End of this year
+    const endOfYear = `${now.getFullYear()}-12-31`;
     const assignFilter = assignedTo ? `AND assigned_to = ${assignedTo}` : "";
-    const activeJobs = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE status NOT IN ('Completed') ${assignFilter}`).get() as any).c;
     const dueThisWeek = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE due_date >= '${today}' AND due_date <= '${weekOut}' AND status NOT IN ('Completed') ${assignFilter}`).get() as any).c;
     const overdue = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE due_date < '${today}' AND status NOT IN ('Completed') ${assignFilter}`).get() as any).c;
-    const totalClients = (sqlite.prepare(`SELECT COUNT(*) as c FROM clients WHERE status = 'Active'`).get() as any).c;
-    return { activeJobs, dueThisWeek, overdue, totalClients };
+    const dueThisMonth = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE due_date >= '${today}' AND due_date <= '${endOfMonth}' AND status NOT IN ('Completed') ${assignFilter}`).get() as any).c;
+    const dueThisQuarter = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE due_date >= '${today}' AND due_date <= '${endOfQuarter}' AND status NOT IN ('Completed') ${assignFilter}`).get() as any).c;
+    const dueThisYear = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE due_date >= '${today}' AND due_date <= '${endOfYear}' AND status NOT IN ('Completed') ${assignFilter}`).get() as any).c;
+    return { dueThisWeek, overdue, dueThisMonth, dueThisQuarter, dueThisYear };
   }
 
   getActivity(limit = 25): Activity[] {

@@ -48,6 +48,7 @@ export const jobs = sqliteTable("jobs", {
   title: text("title").notNull(),
   description: text("description"),
   dueDate: text("due_date"),
+  scheduleDate: text("schedule_date"),
   originalDate: text("original_date"),
   fiveYrAnniversary: text("five_yr_anniversary"),
   renewalNote: text("renewal_note"),

@@ -49,7 +49,7 @@ export default function Jobs() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "", jobType: "SPCC Plan", status: "Upcoming", priority: "Normal",
-      clientId: 0, description: "", dueDate: "", notes: "", assignedTo: undefined,
+      clientId: 0, description: "", dueDate: "", scheduleDate: "", notes: "", assignedTo: undefined,
       createdAt: new Date().toISOString(),
     },
   });
@@ -100,7 +100,7 @@ export default function Jobs() {
 
   const openAdd = () => {
     setEditJob(null);
-    form.reset({ title: "", jobType: "SPCC Plan", status: "Upcoming", priority: "Normal", clientId: 0, description: "", dueDate: "", notes: "", assignedTo: undefined, createdAt: new Date().toISOString() });
+    form.reset({ title: "", jobType: "SPCC Plan", status: "Upcoming", priority: "Normal", clientId: 0, description: "", dueDate: "", scheduleDate: "", notes: "", assignedTo: undefined, createdAt: new Date().toISOString() });
     setDialogOpen(true);
   };
 
@@ -109,6 +109,7 @@ export default function Jobs() {
     form.reset({
       ...job,
       dueDate: job.dueDate ?? "",
+      scheduleDate: job.scheduleDate ?? "",
       assignedTo: job.assignedTo ?? undefined,
     });
     setDialogOpen(true);
@@ -188,6 +189,7 @@ export default function Jobs() {
                   <th className="text-left px-4 py-2.5 font-medium">Client</th>
                   <th className="text-left px-4 py-2.5 font-medium">Type</th>
                   <th className="text-left px-4 py-2.5 font-medium">Due Date</th>
+                  <th className="text-left px-4 py-2.5 font-medium">Schedule Date</th>
                   <th className="text-left px-4 py-2.5 font-medium">Assigned</th>
                   <th className="text-left px-4 py-2.5 font-medium">Status</th>
                   <th className="text-left px-4 py-2.5 font-medium">Actions</th>
@@ -196,10 +198,10 @@ export default function Jobs() {
               <tbody className="divide-y divide-border">
                 {isLoading ? (
                   [...Array(8)].map((_, i) => (
-                    <tr key={i}><td colSpan={7} className="px-4 py-3"><Skeleton className="h-4 w-full" /></td></tr>
+                    <tr key={i}><td colSpan={8} className="px-4 py-3"><Skeleton className="h-4 w-full" /></td></tr>
                   ))
                 ) : filtered.length === 0 ? (
-                  <tr><td colSpan={7} className="px-4 py-10 text-center text-muted-foreground">No jobs found</td></tr>
+                  <tr><td colSpan={8} className="px-4 py-10 text-center text-muted-foreground">No jobs found</td></tr>
                 ) : filtered.map((job) => {
                   const client = clientMap.get(job.clientId);
                   const assignee = job.assignedTo ? userMap.get(job.assignedTo) : null;
@@ -220,6 +222,9 @@ export default function Jobs() {
                       <td className={`px-4 py-3 text-xs font-medium ${isOverdue ? "text-red-400" : "text-foreground"}`}>
                         {due ? format(due, "MMM d, yyyy") : "—"}
                         {isOverdue && <div className="text-[10px] text-red-400">OVERDUE</div>}
+                      </td>
+                      <td className="px-4 py-3 text-xs text-muted-foreground">
+                        {job.scheduleDate ? format(new Date(job.scheduleDate), "MMM d, yyyy") : "—"}
                       </td>
                       <td className="px-4 py-3">
                         {assignee ? (
@@ -310,6 +315,12 @@ export default function Jobs() {
                   </FormItem>
                 )} />
               </div>
+              <FormField control={form.control} name="scheduleDate" render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Schedule Date</FormLabel>
+                  <FormControl><Input type="date" {...field} value={field.value ?? ""} data-testid="input-schedule-date" /></FormControl>
+                </FormItem>
+              )} />
               <div className="grid grid-cols-2 gap-3">
                 <FormField control={form.control} name="assignedTo" render={({ field }) => (
                   <FormItem>
