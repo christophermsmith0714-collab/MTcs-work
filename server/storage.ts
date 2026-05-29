@@ -9,7 +9,10 @@ import {
   type Activity, type InsertActivity,
 } from "@shared/schema";
 
-const sqlite = new Database("data.db");
+import fs from "fs";
+const DB_DIR = process.env.DB_DIR || ".";
+if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
+const sqlite = new Database(`${DB_DIR}/data.db`);
 const db = drizzle(sqlite);
 
 sqlite.exec(`
