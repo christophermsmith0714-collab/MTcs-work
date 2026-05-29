@@ -21,7 +21,7 @@ import { z } from "zod";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const JOB_TYPES = ["SPCC Plan", "SWPPP", "Tank Inspection", "Tier II", "Stormwater Permit", "Other"];
-const STATUSES = ["Not Started", "In Progress", "Done", "Sent to Client", "Uploaded to Onehub"];
+const STATUSES = ["Upcoming", "Scheduled", "Pending Response", "Completed"];
 const PRIORITIES = ["High", "Normal", "Low"];
 
 const formSchema = insertJobSchema.extend({
@@ -48,7 +48,7 @@ export default function Jobs() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "", jobType: "SPCC Plan", status: "Not Started", priority: "Normal",
+      title: "", jobType: "SPCC Plan", status: "Upcoming", priority: "Normal",
       clientId: 0, description: "", dueDate: "", notes: "", assignedTo: undefined,
       createdAt: new Date().toISOString(),
     },
@@ -100,7 +100,7 @@ export default function Jobs() {
 
   const openAdd = () => {
     setEditJob(null);
-    form.reset({ title: "", jobType: "SPCC Plan", status: "Not Started", priority: "Normal", clientId: 0, description: "", dueDate: "", notes: "", assignedTo: undefined, createdAt: new Date().toISOString() });
+    form.reset({ title: "", jobType: "SPCC Plan", status: "Upcoming", priority: "Normal", clientId: 0, description: "", dueDate: "", notes: "", assignedTo: undefined, createdAt: new Date().toISOString() });
     setDialogOpen(true);
   };
 
@@ -204,7 +204,7 @@ export default function Jobs() {
                   const client = clientMap.get(job.clientId);
                   const assignee = job.assignedTo ? userMap.get(job.assignedTo) : null;
                   const due = job.dueDate ? new Date(job.dueDate) : null;
-                  const isOverdue = due ? isPast(due) && !["Done","Sent to Client","Uploaded to Onehub"].includes(job.status) : false;
+                  const isOverdue = due ? isPast(due) && job.status !== "Completed" : false;
                   const currentStatusIdx = STATUSES.indexOf(job.status);
 
                   return (

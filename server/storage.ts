@@ -158,14 +158,14 @@ export class Storage implements IStorage {
     if (filters?.status) conditions.push(eq(jobs.status, filters.status));
     if (filters?.jobType) conditions.push(eq(jobs.jobType, filters.jobType));
     if (filters?.completed) {
-      conditions.push(eq(jobs.status, "Done"));
+      conditions.push(sql`${jobs.status} IN ('Completed')`);
     } else if (!filters?.status) {
       // Default: exclude completed
-      conditions.push(sql`${jobs.status} != 'Done'`);
+      conditions.push(sql`${jobs.status} != 'Completed'`);
     }
     if (filters?.overdue) {
       const today = new Date().toISOString().split("T")[0];
-      conditions.push(sql`${jobs.dueDate} < ${today} AND ${jobs.status} NOT IN ('Done','Sent to Client','Uploaded to Onehub')`);
+      conditions.push(sql`${jobs.dueDate} < ${today} AND ${jobs.status} NOT IN ('Completed')`);
     }
     const q = db.select().from(jobs);
     return conditions.length > 0 ? q.where(and(...conditions)).orderBy(asc(jobs.dueDate)).all() : q.orderBy(asc(jobs.dueDate)).all();
@@ -187,9 +187,9 @@ export class Storage implements IStorage {
     const today = new Date().toISOString().split("T")[0];
     const weekOut = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
     const assignFilter = assignedTo ? `AND assigned_to = ${assignedTo}` : "";
-    const activeJobs = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE status NOT IN ('Done','Sent to Client','Uploaded to Onehub') ${assignFilter}`).get() as any).c;
-    const dueThisWeek = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE due_date >= '${today}' AND due_date <= '${weekOut}' AND status NOT IN ('Done','Sent to Client','Uploaded to Onehub') ${assignFilter}`).get() as any).c;
-    const overdue = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE due_date < '${today}' AND status NOT IN ('Done','Sent to Client','Uploaded to Onehub') ${assignFilter}`).get() as any).c;
+    const activeJobs = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE status NOT IN ('Completed') ${assignFilter}`).get() as any).c;
+    const dueThisWeek = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE due_date >= '${today}' AND due_date <= '${weekOut}' AND status NOT IN ('Completed') ${assignFilter}`).get() as any).c;
+    const overdue = (sqlite.prepare(`SELECT COUNT(*) as c FROM jobs WHERE due_date < '${today}' AND status NOT IN ('Completed') ${assignFilter}`).get() as any).c;
     const totalClients = (sqlite.prepare(`SELECT COUNT(*) as c FROM clients WHERE status = 'Active'`).get() as any).c;
     return { activeJobs, dueThisWeek, overdue, totalClients };
   }
